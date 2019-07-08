@@ -7,14 +7,14 @@ use XML::Simple;
 my $path = '/home/jonathan/.local/share/rhythmbox/rhythmdb.xml';
 
 # XML::Simple
+print "Reading Rhythmbox database...\n";
 my $ref = XMLin($path, KeyAttr => { entry => 'location' } );
 
 # Slice
 my $entries= $ref->{entry};
-#print Dumper($entries);
 
 my $rowcount = scalar keys %$entries;
-print "Found $rowcount rows\n";
+print "Found $rowcount rows. Processing...\n";
 
 # Go through XML import and sort each track into a hash, keyed on album name, containing an
 # array of valid ratings for that album. Skip any without an album or a rating.
