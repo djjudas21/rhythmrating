@@ -3,7 +3,8 @@ use strict;
 use warnings;
 use XML::Simple;
 
-my $path = '/home/jonathan/.local/share/rhythmbox/rhythmdb.xml';
+# Path to Rhythmbox config
+my $path = $ENV{"HOME"} . '/.local/share/rhythmbox/rhythmdb.xml';
 
 # XML::Simple
 print "Reading Rhythmbox database...\n";
