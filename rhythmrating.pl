@@ -1,7 +1,6 @@
 #!/usr/bin/perl -wT
 use strict;
 use warnings;
-use Data::Dumper;
 use XML::Simple;
 
 my $path = '/home/jonathan/.local/share/rhythmbox/rhythmdb.xml';
