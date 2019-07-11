@@ -33,9 +33,9 @@ foreach my $entry (keys %$entries) {
 		next if $entries->{$entry}->{album} eq '[non-album tracks]';
 		my $title = $entries->{$entry}->{title};
 		my $album = $entries->{$entry}->{album};
+		my $albumartist = $entries->{$entry}->{'album-artist'};
 		my $rating = $entries->{$entry}->{rating};
-
-		push (@{$ratingsbyalbum{$album}}, $rating);
+		push (@{$ratingsbyalbum{"$albumartist - $album"}}, $rating);
 	}
 }
 
