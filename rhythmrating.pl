@@ -2,6 +2,15 @@
 use strict;
 use warnings;
 use XML::Simple;
+use Getopt::Long;
+
+# Parse command line arguments
+my $top20 = 0;
+my $bottom20 = 0;
+GetOptions (
+	'top20' => \$top20,
+	'bottom20' => \$bottom20,
+);
 
 # Path to Rhythmbox config
 my $path = $ENV{"HOME"} . '/.local/share/rhythmbox/rhythmdb.xml';
@@ -47,7 +56,25 @@ while (my ($album, $ratings) = each %ratingsbyalbum) {
 	$averages{$album} = $ave_rating;
 }
 
-# Finally print the sorted hash
-foreach my $key (sort { $averages{$b} <=> $averages{$a} } keys %averages) {
-	printf "%.2f %s\n", $averages{$key}, $key;
+if ($top20) {
+	# Finally print the sorted hash
+	my $i = 0;
+	foreach my $key (sort { $averages{$b} <=> $averages{$a} } keys %averages) {
+		printf "%.2f %s\n", $averages{$key}, $key;
+		$i++;
+		last if ($i == 20);
+	}
+} elsif ($bottom20) {
+	# Finally print the sorted hash
+	my $i = 0;
+	foreach my $key (reverse sort { $averages{$b} <=> $averages{$a} } keys %averages) {
+		printf "%.2f %s\n", $averages{$key}, $key;
+		$i++;
+		last if ($i == 20);
+	}
+} else {
+	# Finally print the sorted hash
+	foreach my $key (sort { $averages{$b} <=> $averages{$a} } keys %averages) {
+		printf "%.2f %s\n", $averages{$key}, $key;
+	}
 }
