@@ -5,11 +5,11 @@ use XML::Simple;
 use Getopt::Long;
 
 # Parse command line arguments
-my $top20 = 0;
-my $bottom20 = 0;
+my $top = 0;
+my $bottom = 0;
 GetOptions (
-	'top20' => \$top20,
-	'bottom20' => \$bottom20,
+	'top=i' => \$top,
+	'bottom=i' => \$bottom,
 );
 
 # Path to Rhythmbox config
@@ -57,21 +57,21 @@ while (my ($album, $ratings) = each %ratingsbyalbum) {
 	$averages{$album} = $ave_rating;
 }
 
-if ($top20) {
+if ($top) {
 	# Finally print the sorted hash
 	my $i = 0;
 	foreach my $key (sort { $averages{$b} <=> $averages{$a} } keys %averages) {
 		printf "%.2f %s\n", $averages{$key}, $key;
 		$i++;
-		last if ($i == 20);
+		last if ($i == $top);
 	}
-} elsif ($bottom20) {
+} elsif ($bottom) {
 	# Finally print the sorted hash
 	my $i = 0;
 	foreach my $key (reverse sort { $averages{$b} <=> $averages{$a} } keys %averages) {
 		printf "%.2f %s\n", $averages{$key}, $key;
 		$i++;
-		last if ($i == 20);
+		last if ($i == $bottom);
 	}
 } else {
 	# Finally print the sorted hash
