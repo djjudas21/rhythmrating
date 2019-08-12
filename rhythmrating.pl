@@ -32,9 +32,9 @@ foreach my $entry (keys %$entries) {
 	if ($entries->{$entry}->{title} && $entries->{$entry}->{album} && $entries->{$entry}->{rating}) {
 		next if $entries->{$entry}->{album} eq '[non-album tracks]';
 		next if $entries->{$entry}->{album} eq 'Unknown';
-		my $title = $entries->{$entry}->{title};
-		my $album = $entries->{$entry}->{album};
-		my $albumartist = $entries->{$entry}->{'album-artist'};
+		my $title = $entries->{$entry}->{title} // 'Unknown title';
+		my $album = $entries->{$entry}->{album} // 'Unknown album';
+		my $albumartist = $entries->{$entry}->{'album-artist'} // 'Unknown artist';
 		my $rating = $entries->{$entry}->{rating};
 		push (@{$ratingsbyalbum{"$albumartist - $album"}}, $rating);
 	}
