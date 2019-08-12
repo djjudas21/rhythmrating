@@ -23,7 +23,7 @@ my $ref = XMLin($path, KeyAttr => { entry => 'location' } );
 my $entries= $ref->{entry};
 
 my $rowcount = scalar keys %$entries;
-print "Found $rowcount rows. Processing...\n";
+print "Found $rowcount tracks. Processing...\n";
 
 # Go through XML import and sort each track into a hash, keyed on album name, containing an
 # array of valid ratings for that album. Skip any without an album or a rating.
@@ -39,6 +39,8 @@ foreach my $entry (keys %$entries) {
 		push (@{$ratingsbyalbum{"$albumartist - $album"}}, $rating);
 	}
 }
+my $albumcount = scalar keys %ratingsbyalbum;
+print "Sorted these tracks into $albumcount albums\n\n";
 
 # Then go through the new hash and calculate the mean rating for each album and store this in a new hash
 # as a simple key-value
