@@ -7,9 +7,11 @@ use Getopt::Long;
 # Parse command line arguments
 my $top = 0;
 my $bottom = 0;
+my $normalise = 0;
 GetOptions (
 	'top=i' => \$top,
 	'bottom=i' => \$bottom,
+	'normalise' => \$normalise,
 );
 
 # Path to Rhythmbox config
@@ -56,7 +58,11 @@ while (my ($album, $ratings) = each %ratingsbyalbum) {
 
 	my $ave_rating = $sum_ratings / $num_ratings;
 
-	$averages{$album} = $ave_rating;
+	if ($normalise) {
+		$averages{$album} = &normalise($ave_rating);
+	} else {
+		$averages{$album} = $ave_rating;
+	}
 }
 
 if ($top) {
@@ -80,4 +86,10 @@ if ($top) {
 	foreach my $key (sort { $averages{$b} <=> $averages{$a} } keys %averages) {
 		printf "%.2f %s\n", $averages{$key}, $key;
 	}
+}
+
+# Rhythmbox lets you rate 1-5 stars so we can expand this range out to 0-10
+sub normalise {
+	my $in = shift;
+	return ($in-1) / 4 * 10;
 }

@@ -72,3 +72,22 @@ Sorted these tracks into 725 albums
 1.62 Various Artists - Now That's What I Call Music! 32
 1.67 Playing for Change - Songs Around the World
 ```
+
+Rhythmbox lets you rate tracks between 1-5 stars. If you want to normalise this range to 0-10, add the `--normalise` flag:
+```
+./rhythmrating.pl --top 10 --normalise
+Reading Rhythmbox database...
+Found 11944 tracks. Processing...
+Sorted these tracks into 725 albums
+
+10.00 Vangelis - L'Apocalypse des animaux
+10.00 Queen - Greatest Hits
+9.50 Lange feat. Skye - Drifting Away
+9.28 Yes - Going for the One
+8.75 Apathy Point - Resolve EP
+8.75 Moby - Natural Blues Promo 1
+8.75 Delerium feat. Sarah McLachlan - Silence: Remixes by Airscape and DJ Ti�sto
+8.75 Amy Winehouse - Lioness: Hidden Treasures
+8.33 SuReal - You Take My Breath Away
+8.33 Alice DeeJay - Celebrate Our Love
+```
