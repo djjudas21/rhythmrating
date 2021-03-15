@@ -34,6 +34,7 @@ foreach my $entry (keys %$entries) {
 	if ($entries->{$entry}->{title} && $entries->{$entry}->{album} && $entries->{$entry}->{rating}) {
 		next if $entries->{$entry}->{album} eq '[non-album tracks]';
 		next if $entries->{$entry}->{album} eq 'Unknown';
+		next if $entries->{$entry}->{comment} eq 'Single';
 		my $title = $entries->{$entry}->{title} // 'Unknown title';
 		my $album = $entries->{$entry}->{album} // 'Unknown album';
 		my $albumartist = $entries->{$entry}->{'album-artist'} // 'Unknown artist';
